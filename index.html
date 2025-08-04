@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>オフィス飲食店レコメンダー</title>
+    <title>近隣飲食店レコメンダー</title>
     <style>
       * {
         margin: 0;
@@ -328,7 +328,7 @@
   <body>
     <div class="container">
       <div class="header">
-        <h1>🍽️ オフィス飲食店レコメンダー</h1>
+        <h1>🍽️ 近隣飲食店レコメンダー</h1>
         <p class="subtitle">現在営業中のおすすめ店舗を評価順でご紹介</p>
       </div>
 
@@ -1194,30 +1194,9 @@
             google.maps.event.trigger(markers[index], "click");
           }
         } else {
-          // 詳細情報を表示
-          let details = `${restaurant.name}の詳細情報\n\n`;
-          details += `ジャンル: ${restaurant.genre}\n`;
-          details += `評価: ${
-            restaurant.rating ? restaurant.rating.toFixed(1) : "評価なし"
-          }\n`;
-          details += `距離: ${Math.round(restaurant.distance)}m\n`;
-          details += `営業状態: ${
-            restaurant.isOpen === true
-              ? "営業中"
-              : restaurant.isOpen === false
-              ? "営業時間外"
-              : "不明"
-          }\n`;
-          if (restaurant.hours)
-            details += `本日の営業時間: ${restaurant.hours}\n`;
-          if (restaurant.priceLevel)
-            details += `価格帯: ${"¥".repeat(restaurant.priceLevel)}\n`;
-          if (restaurant.address) details += `住所: ${restaurant.address}\n`;
-          if (restaurant.phone) details += `電話: ${restaurant.phone}\n`;
-          if (restaurant.website)
-            details += `\nウェブサイト: ${restaurant.website}`;
-
-          alert(details + "\n\n※実際の実装では詳細ページに遷移します");
+          // グリッド表示の場合、Google口コミページを開く
+          const reviewUrl = `https://www.google.com/maps/place/?q=place_id:${restaurant.placeId}`;
+          window.open(reviewUrl, '_blank');
         }
       }
 
